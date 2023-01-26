@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block one_news %}
+    <div class = "container" style = "text-align:center">
+    
+    <h1>{{news.title}}</h1>
+    <img src = "{{ news.image.url }}" width = "300" height = "400" alt="Card image cap">
+    <p>{{news.desc}}<p>
+    <p>By - {{news.user_name}}</p>
+    <p>{{news.date}}</p>
+    
+    {% if user.username == news.user_name %}
+        <a class = "btn btn-primary" href = "{% url 'edit_news' news.news_slug %}">Edit</a>
+        <a class = "btn btn-primary" href = "{% url 'delete_news' news.news_slug %}">Delete</a>
+    {% endif %}
+
+   
+    <a style = "display : block" href="/news_main/">Go back to the main page</a>
+    </div>
+{% endblock %}

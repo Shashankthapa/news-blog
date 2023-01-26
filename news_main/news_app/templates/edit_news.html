@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% block edit_news %}
+<div class = "container">
+    <form action = "" method = "post" enctype= "multipart/form-data">
+        {% csrf_token %}
+        <label for="cars">Categories :</label>
+
+        <select name = "cat" id = "cat">
+        {% for cat_obj in cat_obj %}
+        {% if cat_obj.id == news_obj.cat_id %}
+            <option value = "{{cat_obj.id}}" selected>{{cat_obj.cat}}</option>
+        {% else %}
+            <option value = "{{cat_obj.id}}">{{cat_obj.cat}}</option>
+        {% endif %}
+        {% endfor %}
+        </select>
+
+        <label>Title :</label>
+        <input type = "text" name = "title" value = "{{news_obj.title}}" placeholder = "Enter your title"><br><br>
+        <label>Desc : </label>
+        <input type = "text" name = "desc" value = "{{news_obj.desc}}" placeholder = "Enter your title"><br><br>
+        <label>Image :</label>
+        <input type = "file" name = "image"><br><br>
+        <label>Date : </label>
+        <input type = "date" name = "date" value = "{{news_obj.date}}"><br><br>
+        <input type = "submit">
+
+
+        <img src = "{{news_obj.image.url}}">
+    </form>
+</div>
+{% endblock %}
